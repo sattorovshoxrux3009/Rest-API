@@ -17,6 +17,7 @@ func NewServer(opts *Options) *gin.Engine {
 	handler := v1.New(&v1.HandlerV1{
 		Strg: opts.Strg,
 	})
+
 	router.POST("/v1/users", handler.CreateUser)
 	router.DELETE("/v1/user/:id", handler.DeleteUser)
 	router.GET("/v1/user/:id", handler.GetUser)

@@ -9,7 +9,6 @@ import (
 	"example.com/m/server"
 	"example.com/m/storage"
 	_ "github.com/go-sql-driver/mysql"
-	//"github.com/google/uuid"
 )
 
 func main() {
@@ -39,7 +38,7 @@ func main() {
 
 	strg := storage.NewStorage(mysqlConn)
 
-	router:= server.NewServer( &server.Options{
+	router := server.NewServer(&server.Options{
 		Strg: strg,
 	})
 
