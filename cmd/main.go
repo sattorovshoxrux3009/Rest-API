@@ -1,11 +1,16 @@
 package main
 
 import (
+	"context"
 	"database/sql"
 	"fmt"
 	"log"
-	_ "github.com/go-sql-driver/mysql"
+
 	"example.com/m/config"
+	"example.com/m/storage"
+	"example.com/m/storage/repo"
+	_ "github.com/go-sql-driver/mysql"
+	//"github.com/google/uuid"
 )
 
 func main() {
@@ -33,4 +38,37 @@ func main() {
 		log.Println("Connection sucss")
 	}
 
+	/*id, err := uuid.NewRandom()
+	if err != nil {
+		log.Fatal("Error generating UUID: ", err)
+	}
+	strg := storage.NewStorage(mysqlConn)
+	user, err := strg.User().Create(context.TODO(), &repo.User{
+		ID:        id.String(),
+		FirstName: "Satorov",
+		LastName:  "Shohruh",
+		Email:     "Sattorovshohruh300s9@gmaisl.coma",
+		Password:  "12345678a",
+	})
+	if err != nil {
+		log.Fatal("Error creating user: ", err)
+	}
+	fmt.Println(user)
+
+	strg := storage.NewStorage(mysqlConn)
+	userGet, err := strg.User().Get(context.TODO(), "1d5021e5-ed05-4cc8-af1c-5c574515a17c")
+	if err != nil {
+		log.Fatal("Error getting user: ", err)
+	}
+	fmt.Println(userGet)*/
+
+	strg := storage.NewStorage(mysqlConn)
+	err = strg.User().Update(context.TODO(), &repo.UpdateUser{
+		ID:        "b35bf967-b9e3-4982-bad6-6f23c39ec9c0",
+		FirstName: "XSSSShohruh",
+		LastName:  "xsssSatorov",
+	})
+	if err != nil {
+		log.Fatal("Error updating user: ", err)
+	}	
 }
