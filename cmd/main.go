@@ -1,14 +1,13 @@
 package main
 
 import (
-	"context"
 	"database/sql"
 	"fmt"
 	"log"
 
 	"example.com/m/config"
+	"example.com/m/server"
 	"example.com/m/storage"
-	"example.com/m/storage/repo"
 	_ "github.com/go-sql-driver/mysql"
 	//"github.com/google/uuid"
 )
@@ -38,6 +37,17 @@ func main() {
 		log.Println("Connection sucss")
 	}
 
+	strg := storage.NewStorage(mysqlConn)
+
+	router:= server.NewServer( &server.Options{
+		Strg: strg,
+	})
+
+	if err = router.Run(cfg.Port); err != nil {
+		log.Fatal("Error starting server: ", err)
+	}
+	fmt.Println("Server is running on port 6887")
+
 	/*id, err := uuid.NewRandom()
 	if err != nil {
 		log.Fatal("Error generating UUID: ", err)
@@ -47,8 +57,8 @@ func main() {
 		ID:        id.String(),
 		FirstName: "Satorov",
 		LastName:  "Shohruh",
-		Email:     "Sattorovshohruh300s9@gmaisl.coma",
-		Password:  "12345678a",
+		Email:     "Sattorovsfdafafsfasfdasfsaf",
+		Password:  "12345678aaaaaaa",
 	})
 	if err != nil {
 		log.Fatal("Error creating user: ", err)
@@ -60,9 +70,9 @@ func main() {
 	if err != nil {
 		log.Fatal("Error getting user: ", err)
 	}
-	fmt.Println(userGet)*/
+	fmt.Println(userGet)
 
-	strg := storage.NewStorage(mysqlConn)
+	//strg := storage.NewStorage(mysqlConn)
 	err = strg.User().Update(context.TODO(), &repo.UpdateUser{
 		ID:        "b35bf967-b9e3-4982-bad6-6f23c39ec9c0",
 		FirstName: "XSSSShohruh",
@@ -70,5 +80,10 @@ func main() {
 	})
 	if err != nil {
 		log.Fatal("Error updating user: ", err)
-	}	
+	}
+	strg := storage.NewStorage(mysqlConn)
+	err = strg.User().Delete(context.TODO(), "e30a4b32-a36b-4226-b7ba-6d6a381211d2")
+	if err != nil {
+		log.Fatal("Error deleting user: ", err)
+	}*/
 }

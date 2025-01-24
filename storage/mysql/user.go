@@ -45,7 +45,7 @@ func (u *userRepo) Update(ctx context.Context, req *repo.UpdateUser) error {
 	query := `
 		UPDATE users SET 
 			first_name=?,
-			last_name=?, 
+			last_name=?
 		WHERE id=?
 	`
 	res, err := tsx.Exec(query, req.FirstName, req.LastName, req.ID)
@@ -110,7 +110,7 @@ func (u *userRepo) Delete(ctx context.Context, id string) error {
 	if err != nil {
 		return err
 	}
-	res, err := tsx.Exec("DELETE FROM users WHERE id=$1", id)
+	res, err := tsx.Exec("DELETE FROM users WHERE id=?", id)
 	if err != nil {
 		errRoll := tsx.Rollback()
 		if errRoll != nil {
