@@ -11,6 +11,9 @@ tidy:
 run:
 	@go run cmd/main.go
 
+build:
+	@go build -o bin/main.exe cmd/main.go
+
 migration:
 	@migrate create -ext sql -dir ./migrations -seq $(name)
 
