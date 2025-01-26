@@ -10,17 +10,20 @@ import (
 type StorageI interface {
 	User() repo.UserStorageI
 	Post() repo.PostStorageI
+	Comment() repo.CommentStorageI
 }
 
 type storagePg struct {
-	userRepo repo.UserStorageI
-	postRepo repo.PostStorageI
+	userRepo    repo.UserStorageI
+	postRepo    repo.PostStorageI
+	commentRepo repo.CommentStorageI
 }
 
 func NewStorage(mysqlConn *sql.DB) StorageI {
 	return &storagePg{
-		userRepo: mysql.NewUserStorage(mysqlConn),
-		postRepo: mysql.NewPostStorage(mysqlConn),
+		userRepo:    mysql.NewUserStorage(mysqlConn),
+		postRepo:    mysql.NewPostStorage(mysqlConn),
+		commentRepo: mysql.NewCommentStorage(mysqlConn),
 	}
 }
 
@@ -29,4 +32,7 @@ func (s *storagePg) User() repo.UserStorageI {
 }
 func (s *storagePg) Post() repo.PostStorageI {
 	return s.postRepo
+}
+func (s *storagePg) Comment() repo.CommentStorageI {
+	return s.commentRepo
 }

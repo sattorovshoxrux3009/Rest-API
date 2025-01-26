@@ -39,7 +39,7 @@ func (h *handlerV1) CreateUser(ctx *gin.Context) {
 	if err != nil {
 		log.Println(err)
 		ctx.JSON(http.StatusInternalServerError, gin.H{
-			"error": "This email has been registered already", //"Internal error we got :(",
+			"error": "Internal error we got :(", //"Internal error we got :(",
 		})
 		return
 	}

@@ -80,7 +80,7 @@ func (h *handlerV1) UpdatePost(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{
-		"message": "User updated",
+		"message": "Post updated",
 	})
 }
 
@@ -127,6 +127,6 @@ func (h *handlerV1) DeletePost(ctx *gin.Context) {
 		return
 	}
 	ctx.JSON(http.StatusOK, gin.H{
-		"message": "User deleted",
+		"message": "Post deleted",
 	})
 }
