@@ -36,5 +36,10 @@ func NewServer(opts *Options) *gin.Engine {
 	router.GET("/v1/comment/:id", handler.GetComment)
 	router.DELETE("/v1/comment/:id", handler.DeleteComment)
 
+	//Saved Posts
+	router.POST("/v1/saved_posts", handler.CreateSavedPost)
+	router.GET("/v1/saved_post/:id", handler.GetSavedPost)
+	router.DELETE("/v1/saved_post/:id", handler.DeleteSavedPost)
+
 	return router
 }
